@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="EPL Connect - Plateforme collaborative pour les étudiants de l'École Polytechnique de Lomé">
+    <meta name="keywords" content="EPL, École Polytechnique Lomé, étudiants, ressources, forum, collaboration">
+    <meta name="author" content="Anouwardine">
+    <link rel="icon" href="Capture d'écran 2026-02-15 040833.png">
+    <title>Accueil - EPL Connect</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+        :root {
+            --primary-orange: #EE5016;
+            --primary-green: #27ed3e;
+            --primary-blue: #020a4a;
+            --light-green: #d9eadb;
+            --lighter-green: #e5efe6;
+            --dark-text: #0d0d0d;
+            --light-text: #dee7df;
+            --accent-green: #d2e7d5;
+            --gradient-1: linear-gradient(135deg, #020a4a 0%, #0a2472 100%);
+            --gradient-2: linear-gradient(135deg, #27ed3e 0%, #1ea832 100%);
+            --gradient-3: linear-gradient(135deg, #EE5016 0%, #ff6b35 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, rgba(2, 10, 74, 0.95), rgba(2, 10, 74, 0.8)),
+                url(https://img.freepik.com/vecteurs-premium/concept-technologie-mecanique-roue-dentee-circuit-imprime-experience-ingenierie-numerique_618588-1261.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           DARK MODE STYLES
+           ============================================ */
+        body.dark-mode {
+            background: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .entete1,
+        body.dark-mode .stats,
+        body.dark-mode .feature-card {
+            background: #1e1e1e;
+        }
+
+        body.dark-mode .hero-content {
+            background: rgba(18, 18, 18, 0.9);
+            border-color: rgba(39, 237, 62, 0.3);
+        }
+
+        body.dark-mode .hero-content p,
+        body.dark-mode .stat-card p,
+        body.dark-mode .feature-card p,
+        body.dark-mode .footer-section p {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .section-title {
+            color: #90caf9;
+        }
+
+        body.dark-mode footer {
+            background: #1e1e1e;
+        }
+
+        /* ============================================
+           HEADER STYLES
+           ============================================ */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .entete1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #f3f9fa 0%, #e5efe6 100%);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(238, 80, 22, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .entete1 .title h1 {
+            color: var(--primary-orange);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+
+        /* Navigation Bar */
+        .nav {
+            background: var(--gradient-2);
+            padding: 5px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            gap: 10px;
+            padding: 10px 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            transition: all 0.3s ease;
+        }
+
+        .nav-item a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            display: block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-item a:hover {
+            background: var(--primary-orange);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(238, 80, 22, 0.4);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero-section {
+            margin-top: 140px;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            background: rgba(2, 10, 74, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(39, 237, 62, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(39, 237, 62, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(39, 237, 62, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content p {
+            color: var(--light-text);
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content p span {
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 1.6rem;
+            padding: 5px 15px;
+            background: rgba(238, 80, 22, 0.2);
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        /* Hero Image */
+        .hero-image {
+            margin: 40px auto;
+            max-width: 800px;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ============================================
+           STATS SECTION
+           ============================================ */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px 30px;
+            margin: 40px 30px;
+            background: rgba(217, 234, 219, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--gradient-2);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(39, 237, 62, 0.4);
+        }
+
+        .stat-card span {
+            display: block;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* ============================================
+           FEATURES SECTION
+           ============================================ */
+        .section-title {
+            color: var(--primary-orange);
+            font-size: 3.5rem;
+            margin: 60px 0 40px;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: var(--gradient-3);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 40px 30px;
+            margin: 0 30px 60px;
+        }
+
+        .feature-card {
+            background: rgba(217, 234, 219, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(39, 237, 62, 0.3);
+            border-color: var(--primary-green);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 5px 20px rgba(39, 237, 62, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .feature-card h4 {
+            font-size: 1.6rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--dark-text);
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .feature-card .feature-link {
+            display: block;
+            width: 100%;
+            padding: 15px 30px;
+            background: var(--gradient-3);
+            color: white;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(238, 80, 22, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .feature-card .feature-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(238, 80, 22, 0.5);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--gradient-1);
+            color: var(--light-text);
+            padding: 60px 30px 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-green);
+            padding-left: 10px;
+        }
+
+        #contactFormFooter {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #contactFormFooter input,
+        #contactFormFooter textarea {
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(39, 237, 62, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #contactFormFooter input:focus,
+        #contactFormFooter textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        #contactFormFooter input::placeholder,
+        #contactFormFooter textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #contactFormFooter button {
+            padding: 15px;
+            background: var(--gradient-2);
+            color: var(--dark-text);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(39, 237, 62, 0.3);
+        }
+
+        #contactFormFooter button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(39, 237, 62, 0.5);
+        }
+
+        .copyright {
+            border-top: 2px solid rgba(39, 237, 62, 0.3);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .copyright p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .entete1 .title h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-image {
+                height: 250px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card,
+        .stat-card,
+        .hero-content {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Appliquer le thème (clair/sombre) au chargement de la page
+        (function () {
+            const theme = localStorage.getItem('epl_theme');
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+    </script>
+    <!-- ============================================
+         HEADER - BARRE DE NAVIGATION SUPÉRIEURE
+         ============================================ -->
+    <header>
+        <div class="entete">
+            <section class="entete1">
+                <div class="logo">
+                    <img src="Capture d'écran 2026-02-15 040833.png" alt="Logo EPL Connect">
+                </div>
+                <div class="title">
+                    <h1>EPL CONNECT</h1>
+                </div>
+            </section>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="home.html" class="nav-link">🏠 Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="document.html" class="nav-link">📚 Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="chat_forum.html" class="nav-link">💬 Chat Forum</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="news_info.html" class="nav-link">📰 Actualités</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="ai_assistant.html" class="nav-link">🤖 Assistant IA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profil.html" class="nav-link">👤 Profil</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>EPL Connect</h2>
+            <p><span>100%</span> LES MEILLEURS ET MEILLEURES</p>
+            <p>Une plateforme qui réunit tous les étudiants où nous partageons des informations, des cours,</p>
+            <p>des documents et des opinions.</p>
+
+            <!-- Hero Image Placeholder -->
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop"
+                    alt="Étudiants collaborant ensemble">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         STATISTICS SECTION
+         ============================================ -->
+    <section class="stats">
+        <div class="stat-card">
+            <span>100+</span>
+            <p>Étudiants Actifs</p>
+        </div>
+        <div class="stat-card">
+            <span>150+</span>
+            <p>Documents Partagés</p>
+        </div>
+        <div class="stat-card">
+            <span>100%</span>
+            <p>Les Meilleurs</p>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FEATURES SECTION
+         ============================================ -->
+    <section>
+        <h2 class="section-title">Fonctionnalités</h2>
+
+        <div class="features-grid">
+            <!-- Resources Feature -->
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h4>LES RESSOURCES</h4>
+                <p>Bienvenue sur l'espace numérique de la 1ère année de l'École Polytechnique de Lomé. Ce portail est
+                    dédié au partage de connaissances et à l'entraide entre étudiants. Vous y trouverez l'ensemble des
+                    ressources pédagogiques, des notes de cours et des archives pour réussir cette année charnière de
+                    notre parcours d'ingénieur.</p>
+                <a href="document.html" class="feature-link">Voir les ressources</a>
+            </div>
+
+            <!-- Chat & Forum Feature -->
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h4>CHAT & FORUM</h4>
+                <p>Un espace de discussion et d'entraide entre étudiants. Vous pouvez poser des questions, partager des
+                    idées et discuter de tous les sujets liés à votre parcours d'ingénieur. Connectez-vous avec vos
+                    camarades et bénéficiez de l'expérience collective.</p>
+                <a href="chat_forum.html" class="feature-link">Accéder au chat</a>
+            </div>
+
+            <!-- News & Info Feature -->
+            <div class="feature-card">
+                <div class="feature-icon">📰</div>
+                <h4>INFO & ACTUALITÉS</h4>
+                <p>Restez informé des dernières nouvelles de l'EPL. Découvrez les événements à venir, les annonces
+                    importantes
+                    et toutes les informations essentielles pour votre vie étudiante. Ne manquez rien de l'actualité de
+                    votre école.</p>
+                <a href="news_info.html" class="feature-link">Voir les actualités</a>
+            </div>
+            <!-- AI Assistant Feature -->
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h4>ASSISTANT IA</h4>
+                <p>Un assistant IA pour vous aider dans vos études. Posez vos questions et obtenez des réponses
+                    pertinentes.</p>
+                <a href="ai_assistant.html" class="feature-link">Accéder à l'assistant IA</a>
+            </div>
+            <!-- Profile Feature -->
+            <div class="feature-card">
+                <div class="feature-icon">👤</div>
+                <h4>VOTRE PROFIL</h4>
+                <p>Sur EPL Connect, vous avez votre propre profil avec un tableau de bord personnalisé où vous pouvez
+                    planifier vos révisions, organiser vos activités et suivre votre progression académique. Gérez votre
+                    parcours efficacement.</p>
+                <a href="profil.html" class="feature-link">Mon profil</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer>
+        <div class="footer-content">
+            <!-- About Section -->
+            <div class="footer-section">
+                <div class="logo">
+                    <img src="Capture d'écran 2026-02-15 040833.png" alt="Logo EPL Connect">
+                </div>
+                <h4>À Propos</h4>
+                <p>EPL Connect est une plateforme réunissant les étudiants de l'École Polytechnique de Lomé.
+                    Ensemble, nous évoluons et partageons nos connaissances pour un avenir meilleur.</p>
+            </div>
+
+            <!-- Navigation Section -->
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="home.html">🏠 Accueil</a></li>
+                    <li><a href="document.html">📚 Documents</a></li>
+                    <li><a href="chat_forum.html">💬 Chat Forum</a></li>
+                    <li><a href="profil.html">👤 Profil</a></li>
+                    <li><a href="news_info.html">📰 Actualités</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="footer-section">
+                <h4>Contactez-nous</h4>
+                <form id="contactFormFooter">
+                    <input type="text" name="name" placeholder="Votre nom" required>
+                    <input type="email" name="email" placeholder="Votre email" required>
+                    <textarea name="message" placeholder="Votre message" rows="3" required></textarea>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2026 EPL Connect - Tous droits réservés</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
